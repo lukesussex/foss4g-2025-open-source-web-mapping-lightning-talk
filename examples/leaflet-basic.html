@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      #map {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      const foss4g2025 = [-36.85329, 174.76569];
+
+      const map = L.map("map").setView(foss4g2025, 15);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+      }).addTo(map);
+
+      L.marker(foss4g2025)
+        .addTo(map)
+        .bindPopup("FOSS4G 2025 — Auckland")
+        .openPopup();
+    </script>
+  </body>
+</html>
