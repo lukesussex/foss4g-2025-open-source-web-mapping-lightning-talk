@@ -1,34 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <style>#map{height:100vh;margin:0}</style>
-</head>
-<body>
-  <div id="map"></div>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    const map = L.map('map').setView([-36.8485, 174.7633], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      #map {
+        height: 100vh;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      const map = L.map("map").setView([-36.8485, 174.7633], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
 
-    const places = [
-      { name: 'Sky Tower', coords: [-36.8485, 174.7621], note: '360° views — perfect demo landmark.' },
-      { name: 'Viaduct Harbour', coords: [-36.8410, 174.7575], note: 'Waterfront walks; great for photo maps.' },
-      { name: 'Auckland Museum', coords: [-36.8605, 174.7775], note: 'Rich collections — thematic layers idea.' }
-    ];
+      const places = [
+        {
+          name: "Sky Tower",
+          coords: [-36.8485, 174.7621],
+          note: "360° views — perfect demo landmark.",
+        },
+        {
+          name: "Viaduct Harbour",
+          coords: [-36.841, 174.7575],
+          note: "Waterfront walks; great for photo maps.",
+        },
+        {
+          name: "Auckland Museum",
+          coords: [-36.8605, 174.7775],
+          note: "Rich collections — thematic layers idea.",
+        },
+      ];
 
-    places.forEach(p => {
-      L.marker(p.coords).addTo(map).bindPopup(`<strong>${p.name}</strong><br/>${p.note}`);
-    });
+      places.forEach((p) => {
+        L.marker(p.coords)
+          .addTo(map)
+          .bindPopup(`<strong>${p.name}</strong><br/>${p.note}`);
+      });
 
-    // Optional: highlight CBD-ish area
-    L.circle([-36.8485, 174.7633], { radius: 800, color: '#1e90ff', fillOpacity: 0.1 }).addTo(map);
-  </script>
-</body>
+      // Optional: highlight CBD-ish area
+      L.circle([-36.8485, 174.7633], {
+        radius: 800,
+        color: "#1e90ff",
+        fillOpacity: 0.1,
+      }).addTo(map);
+    </script>
+  </body>
 </html>
-
-

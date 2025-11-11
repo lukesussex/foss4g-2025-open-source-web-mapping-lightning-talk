@@ -1,15 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
 
     <style>
-      html, body {
+      html,
+      body {
         height: 100%;
         margin: 0;
       }
@@ -22,8 +31,36 @@
   <body>
     <div id="map"></div>
     <script>
-      const workplaces = [["Christchurch office","137 Victoria Street, Christchurch",-43.52306,172.62933],["Wellington office","Level 14/22 Willeston Street Wellington",-41.28645,174.7768],["Auckland office","70 Shortland Street, Auckland",-36.84672,174.76904],["Tauranga - The Kollective","145 17th Ave, Tauranga",-37.70522,176.15016]];
-      const boundingBox = [[-43.52306,172.62933],[-36.84672,176.15016]];
+      const workplaces = [
+        [
+          "Christchurch office",
+          "137 Victoria Street, Christchurch",
+          -43.52306,
+          172.62933,
+        ],
+        [
+          "Wellington office",
+          "Level 14/22 Willeston Street Wellington",
+          -41.28645,
+          174.7768,
+        ],
+        [
+          "Auckland office",
+          "70 Shortland Street, Auckland",
+          -36.84672,
+          174.76904,
+        ],
+        [
+          "Tauranga - The Kollective",
+          "145 17th Ave, Tauranga",
+          -37.70522,
+          176.15016,
+        ],
+      ];
+      const boundingBox = [
+        [-43.52306, 172.62933],
+        [-36.84672, 176.15016],
+      ];
 
       const map = L.map("map");
       map.fitBounds(boundingBox);
@@ -38,9 +75,11 @@
         }
       ).addTo(map);
 
-      workplaces.forEach(workplace => {
+      workplaces.forEach((workplace) => {
         const [name, address, lat, lon] = workplace;
-        L.marker([lat, lon]).bindPopup(`<b>${name}</b><br>${address}`).addTo(map);
+        L.marker([lat, lon])
+          .bindPopup(`<b>${name}</b><br>${address}`)
+          .addTo(map);
       });
     </script>
   </body>
