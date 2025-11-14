@@ -2,7 +2,7 @@
 
 This repo contains minimal CDN-based examples for getting started with Leaflet, MapLibre and OpenLayers.
 
-These were presented at FOSS4G 2025 in Auckland, New Zealand.
+These were presented in a 5-minute lightning talk at FOSS4G 2025 in Auckland, New Zealand.
 
 ## Quick Start
 
