@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css"
+    />
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <style>
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      #map {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      const foss4g2025 = [174.76569, -36.85329]; // [lon, lat] for MapLibre
+
+      const map = new maplibregl.Map({
+        container: "map",
+        style: "https://demotiles.maplibre.org/style.json",
+        center: foss4g2025,
+        zoom: 15,
+      });
+
+      new maplibregl.Marker()
+        .setLngLat(foss4g2025)
+        .setPopup(
+          new maplibregl.Popup().setHTML("FOSS4G 2025 — Auckland")
+        )
+        .addTo(map)
+        .togglePopup();
+    </script>
+  </body>
+</html>
+
