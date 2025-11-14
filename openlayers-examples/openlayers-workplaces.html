@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ol@latest/ol.css"
+    />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      #map {
+        height: 100vh;
+        width: 100vw;
+      }
+      #popup {
+        background: white;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 8px;
+        min-width: 200px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        font-size: 14px;
+        line-height: 1.5;
+        position: relative;
+      }
+      #popup::before {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid white;
+      }
+      #popup b {
+        font-weight: 600;
+        color: #333;
+      }
+      /* OpenLayers controls spacing */
+      .ol-control {
+        margin: 8px;
+      }
+      .ol-zoom {
+        top: 8px;
+        left: 8px;
+      }
+      .ol-attribution {
+        bottom: 8px;
+        left: 8px;
+        right: auto;
+        padding: 4px 8px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 4px;
+        font-size: 11px;
+        width: auto;
+        max-width: fit-content;
+        display: inline-block;
+      }
+      .ol-attribution ul {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        list-style: none;
+      }
+      .ol-attribution li {
+        display: inline;
+      }
+      .ol-control button {
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 18px;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .ol-control button:hover {
+        background-color: white;
+      }
+      .ol-control button:focus {
+        outline: 2px solid #4a90e2;
+        outline-offset: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="popup" style="display: none"></div>
+    <script type="module">
+      import Map from "https://esm.sh/ol/Map.js";
+      import View from "https://esm.sh/ol/View.js";
+      import TileLayer from "https://esm.sh/ol/layer/Tile.js";
+      import OSM from "https://esm.sh/ol/source/OSM.js";
+      import Overlay from "https://esm.sh/ol/Overlay.js";
+      import VectorLayer from "https://esm.sh/ol/layer/Vector.js";
+      import VectorSource from "https://esm.sh/ol/source/Vector.js";
+      import Feature from "https://esm.sh/ol/Feature.js";
+      import Point from "https://esm.sh/ol/geom/Point.js";
+      import { fromLonLat } from "https://esm.sh/ol/proj.js";
+      import Style from "https://esm.sh/ol/style/Style.js";
+      import Circle from "https://esm.sh/ol/style/Circle.js";
+      import Fill from "https://esm.sh/ol/style/Fill.js";
+      import Stroke from "https://esm.sh/ol/style/Stroke.js";
+
+      const markerStyle = new Style({
+        image: new Circle({
+          radius: 8,
+          fill: new Fill({ color: "#4a90e2" }),
+          stroke: new Stroke({ color: "#fff", width: 2 }),
+        }),
+      });
+
+      const workplaces = [
+        [
+          "Christchurch office",
+          "137 Victoria Street, Christchurch",
+          -43.52306,
+          172.62933,
+        ],
+        [
+          "Wellington office",
+          "Level 14/22 Willeston Street Wellington",
+          -41.28645,
+          174.7768,
+        ],
+        [
+          "Auckland office",
+          "70 Shortland Street, Auckland",
+          -36.84672,
+          174.76904,
+        ],
+        [
+          "Tauranga - The Kollective",
+          "145 17th Ave, Tauranga",
+          -37.70522,
+          176.15016,
+        ],
+      ];
+
+      const source = new VectorSource({
+        features: workplaces.map((workplace) => {
+          const [name, address, lat, lon] = workplace;
+          return new Feature({
+            geometry: new Point(fromLonLat([lon, lat])), // [lon, lat] for OpenLayers
+            name: name,
+            address: address,
+          });
+        }),
+      });
+
+      const vector = new VectorLayer({
+        source: source,
+        style: markerStyle,
+      });
+
+      const map = new Map({
+        target: "map",
+        layers: [new TileLayer({ source: new OSM() }), vector],
+        view: new View(),
+      });
+
+      // Fit bounds to show all workplaces
+      map.getView().fit(source.getExtent(), {
+        padding: [50, 50, 50, 50],
+        duration: 0,
+      });
+
+      const popupEl = document.getElementById("popup");
+      const overlay = new Overlay({
+        element: popupEl,
+        autoPan: { animation: { duration: 200 } },
+        positioning: "bottom-center",
+        offset: [0, -10],
+      });
+      map.addOverlay(overlay);
+
+      map.on("singleclick", (evt) => {
+        const feature = map.forEachFeatureAtPixel(evt.pixel, (f) => f);
+        if (feature) {
+          const name = feature.get("name");
+          const address = feature.get("address");
+          popupEl.innerHTML = `<b>${name}</b><br>${address}`;
+          popupEl.style.display = "block";
+          overlay.setPosition(feature.getGeometry().getCoordinates());
+        } else {
+          overlay.setPosition(undefined);
+          popupEl.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
