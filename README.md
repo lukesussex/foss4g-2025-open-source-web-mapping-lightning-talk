@@ -6,8 +6,4 @@ These were presented in a 5-minute lightning talk at FOSS4G 2025 in Auckland, Ne
 
 ## Quick Start
 
-No build or install required. Just open the examples in a browser:
-
-- Leaflet: `examples/leaflet-basic.html`
-- OpenLayers: `examples/openlayers-basic.html`
-- MapLibre: `examples/maplibre-basic.html`
+No build or install required. Just open the examples in a browser.
