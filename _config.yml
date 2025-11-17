@@ -3,5 +3,4 @@ plugins:
   - jekyll-remote-theme
 
 title: FOSS4G 2025 — Fast, Free, and (Mostly) Painless - Open-Source Web Mapping Examples
-description: FOSS4G 2025
 show_downloads: true
