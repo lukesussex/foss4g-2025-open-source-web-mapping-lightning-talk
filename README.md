@@ -1,4 +1,4 @@
-# README
+# Fast, Free, and (Mostly) Painless - Getting Started with Open-Source Web Mapping
 
 This repo contains minimal examples to get you started with Leaflet, MapLibre and OpenLayers. For each map library there is a basic example showing a map with a single marker.
 
