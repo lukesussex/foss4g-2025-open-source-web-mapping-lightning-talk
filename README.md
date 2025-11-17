@@ -8,9 +8,9 @@ These were presented in a 5-minute lightning talk at FOSS4G 2025 in Auckland, Ne
 
 ## Examples
 
-- [Leaflet Example](leaflet.html)
-- [MapLibre Example](maplibre.html)
-- [OpenLayers Example](openlayers.html)
+- [Leaflet](leaflet.html)
+- [MapLibre](maplibre.html)
+- [OpenLayers](openlayers.html)
 
 ## Quick Start
 
