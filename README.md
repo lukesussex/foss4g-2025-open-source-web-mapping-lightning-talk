@@ -13,6 +13,6 @@ These were presented in a 5-minute lightning talk at FOSS4G 2025 in Auckland, Ne
 
 ## Examples
 
-- [Leaflet](leaflet.html)
-- [MapLibre](maplibre.html)
-- [OpenLayers](openlayers.html)
+- <a href="leaflet.html" target="_blank" rel="noopener noreferrer">Leaflet</a>
+- <a href="maplibre.html" target="_blank" rel="noopener noreferrer">MapLibre</a>
+- <a href="openlayers.html" target="_blank" rel="noopener noreferrer">OpenLayers</a>
