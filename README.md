@@ -8,9 +8,9 @@ These were presented in a 5-minute lightning talk at FOSS4G 2025 in Auckland, Ne
 
 ## Examples
 
-- [Leaflet Example](leaflet.html) - Basic map with a single marker
-- [MapLibre Example](maplibre.html) - Basic map with a single marker
-- [OpenLayers Example](openlayers.html) - Basic map with a single marker
+- [Leaflet Example](leaflet.html)
+- [MapLibre Example](maplibre.html)
+- [OpenLayers Example](openlayers.html)
 
 ## Quick Start
 
