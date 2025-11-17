@@ -2,5 +2,4 @@ remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
 
-title: FOSS4G 2025 — Fast, Free, and (Mostly) Painless - Open-Source Web Mapping Examples
 show_downloads: true
